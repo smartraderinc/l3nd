@@ -31,8 +31,8 @@ contract L3ndRegistry is Initializable, OwnableUpgradeable, UUPSUpgradeable {
         return whiteListMap[tokenAddress];
     }
 
-    function getOpenLoan(address debtorAddress) public returns (address) {
-        return openLoansMap[debtorAddress];
+    function getOpenLoan(address debtor) public returns (address) {
+        return openLoansMap[debtor];
     }
 
     event NFTAdded(address);
@@ -67,5 +67,31 @@ contract L3ndRegistry is Initializable, OwnableUpgradeable, UUPSUpgradeable {
             // if balance check
             // TODO: LEVI check with the graph? 
         }
+    }
+
+    // First time called the status should be false
+    // Setting it to false means an active loan has been paid
+    function setLoanActive(address debtor, address loanAddr) {
+        // Validate only L3ND Contract can create new loan contracts
+        require(msg.sender == L3ND_ADDR, 'UNAUTHORIZED')
+
+        // Validate no open loans
+        require(openLoansMap[debtor] == address(0), 'HAS_OPEN_LOAN');
+        
+        // Set open loan
+        openLoansMap[debtor] = loanAddr;
+    }
+
+    // Set loan as payed
+    // activating the loan in the map
+    function setLoanInactive(address debtor) {
+        // Get loan contract address
+        actualLoanAddr = openLoansMap[debtor];
+
+        // Validate is loan contract calling
+        require(msg.sender == actualLoanAddr);
+
+        // Remove open loan
+        delete openLoansMap[debtor];
     }
 }

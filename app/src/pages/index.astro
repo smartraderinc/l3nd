@@ -1,15 +1,24 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import L3ndConnect from '../components/L3ndConnect.svelte';
+import Layout from "../layouts/Layout.astro";
+import L3ndConnect from "../components/L3ndConnect.svelte";
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<h1>Welcome to <span class="text-gradient">L3ND</span></h1>
-		<p class="instructions">
-			<code>Connect your wallet</code> 
-		</p>
-		<L3ndConnect client:visible />
+		<div class="grid">
+			<div>
+				<h1>Welcome to <span class="text-gradient">L3ND</span></h1>
+				<p class="instructions">
+					<code>Connect your wallet</code>
+				</p>
+				<L3ndConnect client:visible />
+			</div>
+			<div>
+				<p>
+					.
+				</p>
+			</div>
+		</div>
 	</main>
 </Layout>
 

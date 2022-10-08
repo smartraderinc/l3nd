@@ -8,12 +8,15 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
 
 import "./interfaces/iL3ndRegistry.sol";
 import "./interfaces/iLoanFactory.sol";
+import "./interfaces/iSuperToken.sol";
 
 contract LendToken is Initializable, ERC20Upgradeable, OwnableUpgradeable, UUPSUpgradeable {
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
     }
+
+    constant address MATICX_ADDR = "0x3aD736904E9e65189c3000c7DD2c8AC8bB7cD4e3"
 
     address public REG_ADDRESS;
     uint256 public totalReceived;
@@ -76,7 +79,7 @@ contract LendToken is Initializable, ERC20Upgradeable, OwnableUpgradeable, UUPSU
         require(iL3ndRegistry(REG_ADDRESS).isWhitelisted(tokenAddress) == true, 'NOT_WHITELISTED');
 
         // Check with L3ND Registry for no open loans
-        require(iL3ndRegistry(REG_ADDRESS).getOpenLoan(tokenAddress) == address(0), 'HAS_OPEN_LOAN');
+        require(iL3ndRegistry(REG_ADDRESS).getOpenLoan(debtor=msg.sender) == address(0), 'HAS_OPEN_LOAN');
 
         // Check with opengraph for NFT qualities
         // to calculate the risk and interest rate
@@ -84,19 +87,18 @@ contract LendToken is Initializable, ERC20Upgradeable, OwnableUpgradeable, UUPSU
 
 
         // Ask loan factory to deploy Loan Contract
-        iLoanFactory.deployLoan(loan_amount, blocks);
-        
+        address loanAddr = iLoanFactory.deployLoan(loan_amount, blocks);
+
+        // Register open loan in registry
+        iL3ndRegistry(REG_ADDRESS).setLoanActive(debtor=msg.sender, loanAddr=loanAddr);
 
         // Give Loan (Send native tokens)
         // (bool success, ) = payable(msg.sender).call{value:loan_amount}("");
 
-        // Give Loan (Send maticx tokens)
-        (bool success, ) = payable(msg.sender).call{value:loan_amount}("");
+        // Give Loan (Send maticx tokens (SuperFluid Matic Token))
+        bool success = ISuperToken(MATICX_ADDR).transferFrom(address(this), msg.sender, loan_amount)
 
         require(success, "LOAN_FAILED");
-
-
-
 
         super._afterTokenTransfer(from, to, tokenId);
     }

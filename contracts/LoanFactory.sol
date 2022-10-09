@@ -10,18 +10,21 @@ import "./NFTLoan.sol";
 
 contract LoanFactory is Initializable, OwnableUpgradeable, UUPSUpgradeable {
     using CountersUpgradeable for CountersUpgradeable.Counter;
-    
+
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
     }
 
-    address L3ND_ADDR;
-    address L3ND_REG;
+    address public L3ND_ADDR;
+    address public L3ND_REG;
 
     CountersUpgradeable.Counter private _cpNonce;
 
-    function initialize(address l3nd_addr, address l3nd_reg) public initializer {
+    function initialize(address l3nd_addr, address l3nd_reg)
+        public
+        initializer
+    {
         __Ownable_init();
         __UUPSUpgradeable_init();
 
@@ -53,7 +56,8 @@ contract LoanFactory is Initializable, OwnableUpgradeable, UUPSUpgradeable {
         uint256 _lent,
         int96 _irate,
         address _nftaddr,
-        uint256 _tokenId
+        uint256 _tokenId,
+        address _debtor
     ) public payable returns (address) {
         // Only l3nd contract can call
         require(msg.sender == L3ND_ADDR, "NOT_L3ND");
@@ -67,7 +71,15 @@ contract LoanFactory is Initializable, OwnableUpgradeable, UUPSUpgradeable {
         );
         _cpNonce.increment();
         address loan_addr = address(
-            new NFTLoan{salt: _salted_bytes}(L3ND_ADDR, L3ND_REG, _lent, _irate, _nftaddr, _tokenId)
+            new NFTLoan{salt: _salted_bytes}(
+                L3ND_ADDR,
+                L3ND_REG,
+                _lent,
+                _irate,
+                _nftaddr,
+                _tokenId,
+                _debtor
+            )
         );
 
         return loan_addr;

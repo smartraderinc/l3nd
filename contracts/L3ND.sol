@@ -22,7 +22,7 @@ contract LendToken is
     IERC721ReceiverUpgradeable
 {
     using SafeMath for uint256;
-    
+
     /// @custom:oz-upgrades-unsafe-allow constructor
     constructor() {
         _disableInitializers();
@@ -31,9 +31,10 @@ contract LendToken is
     address internal constant MATICX_ADDR =
         0x3aD736904E9e65189c3000c7DD2c8AC8bB7cD4e3;
 
-    address internal constant WETH_ADDR = 0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619;
-    address internal constant ETHX_ADDR = 0x27e1e4E6BC79D93032abef01025811B7E4727e85;
-
+    address internal constant WETH_ADDR =
+        0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619;
+    address internal constant ETHX_ADDR =
+        0x27e1e4E6BC79D93032abef01025811B7E4727e85;
 
     address public REG_ADDRESS;
     address public FACTORY_ADDRESS;
@@ -41,7 +42,7 @@ contract LendToken is
     uint256 public totalReceived;
     uint256 public totalValue;
     bool public givingLoans;
-    
+
     uint256 constant loan_blocks = 1234286; // Around 30 days if blocks are 2.1secs avg
     int96 public flowRate;
 
@@ -94,7 +95,10 @@ contract LendToken is
         flowRate = _fr;
     }
 
-    function setConfig(address _factory, address registryAddress) public onlyOwner {
+    function setConfig(address _factory, address registryAddress)
+        public
+        onlyOwner
+    {
         FACTORY_ADDRESS = _factory;
         REG_ADDRESS = registryAddress;
     }
@@ -107,13 +111,17 @@ contract LendToken is
         super._beforeTokenTransfer(from, to, tokenId);
     }
 
-
-    function emptyVault() public onlyOwner{
+    function emptyVault() public onlyOwner {
         // Send Wrapped Tokens
-        ISuperToken(MATICX_ADDR).transfer(msg.sender, ISuperToken(MATICX_ADDR).balanceOf(address(this)));
+        ISuperToken(MATICX_ADDR).transfer(
+            msg.sender,
+            ISuperToken(MATICX_ADDR).balanceOf(address(this))
+        );
 
         // Send Native Tokens
-        (bool success, ) = payable(msg.sender).call{value:address(this).balance}("");
+        (bool success, ) = payable(msg.sender).call{
+            value: address(this).balance
+        }("");
         require(success, "Transfer failed.");
     }
 
@@ -152,7 +160,6 @@ contract LendToken is
     //     super._afterTokenTransfer(from, to, amount);
     // }
 
-
     // A loan will be requested when sending the nft to the L3nd Vault
     /**
      * @dev See {IERC721Receiver-onERC721Received}.
@@ -169,11 +176,16 @@ contract LendToken is
         address tokenAddress = msg.sender;
 
         // Get amount we'll lend to provided NFT
-        uint loanSize = iL3ndRegistry(REG_ADDRESS).getAmountToLend(tokenAddress);
+        uint256 loanSize = iL3ndRegistry(REG_ADDRESS).getAmountToLend(
+            tokenAddress
+        );
 
         // Check we have enough to lend
         // The balance lended is in SuperTokens
-        require(ISuperToken(MATICX_ADDR).balanceOf(address(this)) >= loanSize, "NO_FUNDS_TO_L3ND");
+        require(
+            ISuperToken(MATICX_ADDR).balanceOf(address(this)) >= loanSize,
+            "NO_FUNDS_TO_L3ND"
+        );
 
         // Check NFT Token is in white list
         require(
@@ -193,27 +205,30 @@ contract LendToken is
         // For now we have this stored in L3ndRegistry
 
         // Ask loan factory to deploy Loan Contract
-        address loanAddr = iLoanFactory(FACTORY_ADDRESS).deployLoan(loanSize, flowRate, tokenAddress, tokenId);
+        address loanAddr = iLoanFactory(FACTORY_ADDRESS).deployLoan(
+            loanSize,
+            flowRate,
+            tokenAddress,
+            tokenId,
+            from
+        );
 
         // Register open loan in registry
-        iL3ndRegistry(REG_ADDRESS).setLoanActive(
-            msg.sender,
-            loanAddr
-        );
+        iL3ndRegistry(REG_ADDRESS).setLoanActive(from, loanAddr);
 
         // Give Loan (Send native tokens)
         // (bool success, ) = payable(msg.sender).call{value:loanSize}("");
 
-        // Give Loan (Send maticx tokens (SuperFluid Matic Token))
-        bool success = ISuperToken(MATICX_ADDR).transferFrom(
-            address(this),
-            msg.sender,
-            loanSize
-        );
+        // // Give Loan (Send maticx tokens (SuperFluid Matic Token))
+        // bool success = ISuperToken(MATICX_ADDR).transferFrom(
+        //     address(this),
+        //     from,
+        //     loanSize
+        // );
 
-        require(success, "LOAN_FAILED");
+        // require(success, "LOAN_FAILED");
 
-        emit ReceivedNFT(from, msg.sender, tokenId);
+        emit ReceivedNFT(from, tokenAddress, tokenId);
 
         return this.onERC721Received.selector;
     }

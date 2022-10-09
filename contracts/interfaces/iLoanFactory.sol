@@ -6,7 +6,7 @@ interface iLoanFactory{
     // Returns the address of the 
     // deployed loan contract
     function deployLoan(
-        uint lent, uint blocks
+        uint _lent, int96 _irate, address nftaddr, uint tokenId
     ) external payable returns (address);
 
 }

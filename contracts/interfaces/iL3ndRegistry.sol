@@ -9,4 +9,8 @@ interface iL3ndRegistry{
     function setLoanActive(address debtor, address loanAddr) external;
 
     function setLoanInactive(address debtor) external;
+
+    function getWhiteListCount() external returns (uint);
+
+    function getAmountToLend(address tokenAddress) external returns(uint tokens);
 }

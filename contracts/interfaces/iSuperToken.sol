@@ -1,3 +1,8 @@
+import "./iSuperFluidToken.sol";
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC777/IERC777.sol";
+import "./TokenInfo.sol";
+
 interface ISuperToken is ISuperfluidToken, TokenInfo, IERC20, IERC777 {
 
     function initialize(

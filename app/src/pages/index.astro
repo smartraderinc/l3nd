@@ -1,35 +1,55 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import L3ndConnect from "../components/L3ndConnect.svelte";
+import L3ndStart from "../components/L3ndStart.svelte";
+import { ethers } from "ethers";
+
+
+export async function getStaticPaths() {
+  return [
+    { params: {id:"address"}}
+    // ...
+  ];
+}
 ---
 
-<Layout title="Welcome to Astro.">
-	<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<script src="codigo.js"></script>
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="../css/style.css">
-	<title></title>
-	</head>
-	<body>
+
+
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/styles/global.css">
+<title></title>
+</head>
+<body>
+    <div>
+        <img src="src/img/logo-light.png" alt="" id="logo">
+    </div>
+    <div>
+        <h1 id="txt-hero">Micro loans with <br> NFT as Collateral</h1>
+        <p id="txt-home">We have a large amount of verified collections on OpenSea, select the ones you want to stack and get a loan up to $300.00 USD, with 30 days to pay.
+			<br><br>
+
+			It depends of the score of the collection the interest rate you'll get.</p>
+        
 		<div>
-			<img src="../img/logo-light.png" alt="" id="logo">
+			<!-- {#if !myAccount} -->
+			<!-- <button class="btn wallet-connect" on:click={connectWallet} style=""><p class="black-button-text">Connect Wallet</p></button> -->
+			<!-- {/if} -->
+
+			<L3ndStart client:only />
 		</div>
-		<div>
-			<h1 id="txt-hero">Micro loans with <br> NFT as Collateral</h1>
-			<p id="txt-home">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-			<Button id="btn-home">Connect Wallet</Button>
-		</div>
-		<div>
-			<img src="../img/hero-img.png" alt="" height="720px" id="hero-img">
-		</div>
-	</body>
-	</html>
-</Layout>
+        <!-- <button id="btn-home">Connect Wallet</button> -->
+    </div>
+    <div>
+        <img src="src/img/hero-img.png" alt="" height="100%" id="hero-img">
+    </div>
+</body>
+</html>
 
 <style>
 	main {
@@ -74,4 +94,33 @@ import L3ndConnect from "../components/L3ndConnect.svelte";
 		gap: 1rem;
 		padding: 0;
 	}
+    .wallet-connect {
+        position: absolute;
+        width: 269px;
+        height: 55px;
+        left: 120px;
+        top: 655px;
+
+        background: #65F2C0;
+        border-radius: 3px;
+        border:0
+    }
+    .black-button-text {
+        /* position: absolute; */
+        /* width: 166px;
+        height: 27px;
+        left: 167px;
+        top: 669px; */
+
+        font-family: 'Inter';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 22px;
+        line-height: 27px;
+        margin: 0px;
+        /* identical to box height */
+
+        color: #131C2A;
+
+    }
 </style>

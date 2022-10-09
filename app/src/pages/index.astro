@@ -4,22 +4,31 @@ import L3ndConnect from "../components/L3ndConnect.svelte";
 ---
 
 <Layout title="Welcome to Astro.">
-	<main>
-		<div class="grid">
-			<div>
-				<h1>Welcome to <span class="text-gradient">L3ND</span></h1>
-				<p class="instructions">
-					<code>Connect your wallet</code>
-				</p>
-				<L3ndConnect client:visible />
-			</div>
-			<div>
-				<p>
-					.
-				</p>
-			</div>
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="codigo.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="../css/style.css">
+	<title></title>
+	</head>
+	<body>
+		<div>
+			<img src="../img/logo-light.png" alt="" id="logo">
 		</div>
-	</main>
+		<div>
+			<h1 id="txt-hero">Micro loans with <br> NFT as Collateral</h1>
+			<p id="txt-home">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			<Button id="btn-home">Connect Wallet</Button>
+		</div>
+		<div>
+			<img src="../img/hero-img.png" alt="" height="720px" id="hero-img">
+		</div>
+	</body>
+	</html>
 </Layout>
 
 <style>

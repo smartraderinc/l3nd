@@ -1,0 +1,240 @@
+body {
+
+}
+
+h1 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 80px;
+    color: #131C2A;
+}
+
+p {
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+#hero-img {
+  position: absolute;
+  width: 828px;
+  height: 100%;
+  right: 0;
+  top: 0px;
+}
+
+.button, #btn-home {
+    color: #131C2A;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 22px;
+
+    position: absolute;
+    width: 269px;
+    height: 55px;
+    left: 120px;
+    top: 655px;
+
+    background: #65F2C0;
+    border-radius: 3px;
+  }
+
+  #logo {
+    position: absolute;
+    width: 157px;
+    height: 52.31px;
+    left: 120px;
+    top: 46px;
+  }
+
+
+  #txt-hero {
+    position: absolute;
+    width: 645px;
+    height: 208px;
+    left: 120px;
+    top: 209px;
+
+    font-family: 'Chakra Petch';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 80px;
+    line-height: 104px;
+
+    color: #131C2A;
+  }
+
+  #txt-home {
+    position: absolute;
+    width: 541px;
+    height: 95px;
+    left: 120px;
+    top: 455px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 19px;
+
+    color: #131C2A;
+
+
+  }
+
+#lado-izq {
+  position: absolute;
+width: 604px;
+height: 1024px;
+left: 0px;
+top: 0px;
+
+background: #fff;
+}
+
+h1 #text-hero02 {
+  position: absolute;
+width: 245px;
+height: 130px;
+left: 120px;
+top: 239px;
+
+font-family: 'Chakra Petch';
+font-style: normal;
+font-weight: 700;
+font-size: 50px;
+line-height: 65px;
+
+color: #FFFFFF;
+}
+
+#logoDark {
+  position: absolute;
+width: 157px;
+height: 52.31px;
+left: 125px;
+top: 34px;
+}
+
+#lado-izq {
+width: 604px;
+height: 100%;
+left: 0px;
+top: 0px;
+
+background-color: #131C2A;
+}
+
+#hero-prof {
+  position: absolute;
+width: 245px;
+height: 130px;
+left: 120px;
+top: 239px;
+
+font-family: 'Chakra Petch';
+font-style: normal;
+font-weight: 700;
+font-size: 50px;
+line-height: 65px;
+
+color: #fff;
+}
+
+#menu {
+  position: absolute;
+width: 54px;
+height: 27px;
+left: 120px;
+top: 131px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 700;
+font-size: 22px;
+line-height: 27px;
+/* identical to box height */
+
+
+color: #fff;
+
+}
+
+#menu02 {
+  position: absolute;
+  width: 69px;
+  height: 27px;
+  left: 194px;
+  top: 131px;
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 27px;
+  /* identical to box height */
+  
+  
+  color: #fff;
+  
+  opacity: 0.2;
+}
+
+#barrita {
+  position: absolute;
+width: 54px;
+height: 0px;
+left: 120px;
+top: 185px;
+
+border: 3px solid #fff;
+}
+
+#lado-izq {
+  position: absolute;
+width: 604px;
+height: 1024px;
+left: 0px;
+top: 0px;
+
+background: #131C2A;
+}
+
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  width: 100%; /* Full-width */
+  height: 25px; /* Specified height */
+  background: #d3d3d3; /* Grey background */
+  outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default look */
+  appearance: none;
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}
+
+.slider::-moz-range-thumb {
+  width: 25px; /* Set a specific slider handle width */
+  height: 25px; /* Slider handle height */
+  background: #04AA6D; /* Green background */
+  cursor: pointer; /* Cursor on hover */
+}

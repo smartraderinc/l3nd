@@ -1,6 +1,14 @@
 <script lang="ts">
     import { Framework } from "@superfluid-finance/sdk-core";
     import { ethers } from "ethers";
+    import { Alchemy, Network } from "alchemy-sdk";
+
+    const config = {
+    apiKey: "i7gthpZXJbF5Y6mbm2VF10slqmNorgTd",
+    network: Network.ETH_MAINNET,
+    };
+
+    const alchemy = new Alchemy(config);
 
     let mysf;
     let myAccount;
@@ -73,19 +81,39 @@
             // and connected their wallet for the first time.
             // setupEventListener()
 
-            const chain = await window.ethereum.request({ method: "eth_chainId" });
+            let chain = await window.ethereum.request({ method: "eth_chainId" });
             let chainId = chain;
             console.log("chain ID:", chain);
             console.log("global Chain Id:", chainId);
+            if (chainId != '0x89') {
+
+                await window.ethereum.request({
+                method: "wallet_addEthereumChain",
+                params: [{
+                    chainId: "0x89",
+                    rpcUrls: ["https://polygon-rpc.com/"],
+                    chainName: "Polygon Mainnet",
+                    nativeCurrency: {
+                        name: "MATIC",
+                        symbol: "MATIC",
+                        decimals: 18
+                    },
+                    blockExplorerUrls: ["https://polygonscan.com/"]
+                }]
+                });
+                chain = await window.ethereum.request({ method: "eth_chainId" });
+                chainId = chain;                
+            }
 
             myProvider = new ethers.providers.Web3Provider(window.ethereum);
             mySigner = myProvider.getSigner();
+
 
             mysf = await Framework.create({
                 chainId: Number(chainId),
                 provider: myProvider,
             });
-
+            
             checkBalance()
         } catch (error) {
             console.log(error);
@@ -158,6 +186,16 @@
         let newFlowRateDisplay = calculateFlowRate(e.target.value);
         flowRateDisplay = newFlowRateDisplay.toString();
     };
+
+    const fetchNFTs = async () => {
+
+        try {
+        const nfts = await alchemy.nft.getNftsForOwner(myAccount);
+            return nfts
+        } catch (error) {
+        console.log(error);
+        }
+        };
 </script>
 
 {#if myAccount}

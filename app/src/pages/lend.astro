@@ -1,0 +1,225 @@
+---
+import Layout from "../layouts/Layout.astro";
+import L3ndConnect from "../components/L3ndConnect.svelte";
+
+
+const model_data = {
+	"ownedNfts": [
+	{
+		"contract": {
+		"address": "0x0beed7099af7514ccedf642cfea435731176fb02"
+		},
+		"id": {
+		"tokenId": "28",
+		"tokenMetadata": {
+			"tokenType": "ERC721"
+		}
+		},
+		"title": "DuskBreaker #28",
+		"description": "Breakers have the honor of serving humanity through their work on The Dusk. They are part of a select squad of 10,000 recruits who spend their days exploring a mysterious alien spaceship filled with friends, foes, and otherworldly technology.",
+		"tokenUri": {
+		"raw": "https://duskbreakers.gg/api/breakers/28",
+		"gateway": "https://duskbreakers.gg/api/breakers/28"
+		},
+		"media": [
+		{
+			"raw": "https://duskbreakers.gg/breaker_images/28.png",
+			"gateway": "https://duskbreakers.gg/breaker_images/28.png"
+		}
+		],
+		"metadata": {
+		"name": "DuskBreaker #28",
+		"description": "Breakers have the honor of serving humanity through their work on The Dusk. They are part of a select squad of 10,000 recruits who spend their days exploring a mysterious alien spaceship filled with friends, foes, and otherworldly technology.",
+		"image": "https://duskbreakers.gg/breaker_images/28.png",
+		"external_url": "https://duskbreakers.gg",
+		"attributes": [
+			{
+			"value": "Locust Rider Armor (Red)",
+			"trait_type": "Clothes"
+			},
+			{
+			"value": "Big Smile (Purple)",
+			"trait_type": "Mouth"
+			},
+			{
+			"value": "Yellow",
+			"trait_type": "Background"
+			}
+		]
+		},
+		"timeLastUpdated": "2022-02-16T22:52:54.719Z",
+		"contractMetadata": {
+		"name": "DuskBreakers",
+		"symbol": "DUSK",
+		"totalSupply": "10000",
+		"tokenType": "ERC721"
+		}
+	},
+	{
+		"contract": {
+		"address": "0x97597002980134bea46250aa0510c9b90d87a587"
+		},
+		"id": {
+		"tokenId": "5527",
+		"tokenMetadata": {
+			"tokenType": "ERC721"
+		}
+		},
+		"title": "Runner #5527",
+		"description": "Chain Runners are Mega City renegades 100% generated on chain.",
+		"tokenUri": {
+		"raw": "https://api.chainrunners.xyz/tokens/metadata/5527?dna=73247164192459371523281785218958151913554625578441142916970699984935810987041",
+		"gateway": "https://api.chainrunners.xyz/tokens/metadata/5527?dna=73247164192459371523281785218958151913554625578441142916970699984935810987041"
+		},
+		"media": [
+		{
+			"raw": "https://img.chainrunners.xyz/api/v1/tokens/png/5527",
+			"gateway": "https://img.chainrunners.xyz/api/v1/tokens/png/5527"
+		}
+		],
+		"metadata": {
+		"name": "Runner #5527",
+		"description": "Chain Runners are Mega City renegades 100% generated on chain.",
+		"image": "https://img.chainrunners.xyz/api/v1/tokens/png/5527",
+		"attributes": [
+			{
+			"value": "Purple Green Diag",
+			"trait_type": "Background"
+			},
+			{
+			"value": "Human",
+			"trait_type": "Race"
+			},
+			{
+			"value": "Cig",
+			"trait_type": "Mouth Accessory"
+			}
+		]
+		},
+		"timeLastUpdated": "2022-02-18T00:42:04.401Z",
+		"contractMetadata": {
+		"name": "Chain Runners",
+		"symbol": "RUN",
+		"totalSupply": "10000",
+		"tokenType": "ERC721"
+		}
+	}
+	],
+	"totalCount": 6,
+	"blockHash": "0xeb2d26af5b6175344a14091777535a2cb21c681665a734a8285f889981987630"
+    }
+	
+	
+	// .searchParams.get('address')
+	// console.log(search)
+
+    // const urlParams = new URLSearchParams(url.search);
+    // const myAccount = urlParams.has('address');
+    // console.log(myAccount)
+
+
+
+
+	// const fetchNFTs = async () => {
+    //     try {
+    //     // const nfts = await alchemy.nft.getNftsForOwner(myAccount);
+    //         const nfts = model_data.ownedNfts
+    //         userNfts = model_data.ownedNfts
+    //         console.log(nfts)
+    //         return nfts
+    //     } catch (error) {
+    //     console.log(error);
+    //     }
+    // };
+
+---
+
+<html lang="en-US">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="src/styles/global.css">
+<title></title>
+</head>
+<body>
+    <div>
+		
+        <div id="lado-izq">
+            
+            <img src="src/img/logo-dark.png" alt="" id="logoDark">
+            <span>
+                <h3 id="menu">Lend</h3>
+                <span id="barrita"></span>
+                <h3 id="menu02">Vaults</h3>
+            </span>
+            <h2 id="hero-prof">Select the ammount</h2>
+			<br>
+            <div class="slidecontainer">
+                <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+            </div>
+            <p></p>
+        </div>
+		<L3ndConnect client:visible />
+		<div class="lado-der">
+			<div class="grid">
+				
+
+			</div>
+		</div>
+    </div>
+    
+</body>
+</html>
+
+<style>
+	main {
+		margin: auto;
+		padding: 1.5rem;
+		max-width: 60ch;
+	}
+	h1 {
+		font-size: 3rem;
+		font-weight: 800;
+		margin: 0;
+	}
+	.text-gradient {
+		background-image: var(--accent-gradient);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-size: 400%;
+		background-position: 0%;
+	}
+	.instructions {
+		line-height: 1.6;
+		margin: 1rem 0;
+		border: 1px solid rgba(var(--accent), 25%);
+		background-color: white;
+		padding: 1rem;
+		border-radius: 0.4rem;
+	}
+	.instructions code {
+		font-size: 0.875em;
+		font-weight: bold;
+		background: rgba(var(--accent), 12%);
+		color: rgb(var(--accent));
+		border-radius: 4px;
+		padding: 0.3em 0.45em;
+	}
+	.instructions strong {
+		color: rgb(var(--accent));
+	}
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 1rem;
+		padding: 0;
+	}
+	.lado-der {
+		right: 0px;
+		top: 0px;
+	}
+</style>

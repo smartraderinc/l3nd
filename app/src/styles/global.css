@@ -84,8 +84,8 @@ p {
 
 #lado-izq {
   position: absolute;
-width: 604px;
-height: 1024px;
+width: 35%;
+height: 100%;
 left: 0px;
 top: 0px;
 
@@ -114,15 +114,6 @@ width: 157px;
 height: 52.31px;
 left: 125px;
 top: 34px;
-}
-
-#lado-izq {
-width: 604px;
-height: 100%;
-left: 0px;
-top: 0px;
-
-background-color: #131C2A;
 }
 
 #hero-prof {
@@ -192,28 +183,32 @@ border: 3px solid #fff;
 
 #lado-izq {
   position: absolute;
-width: 604px;
-height: 1024px;
+  display: flex;
+width: 35%;
+height: 100%;
 left: 0px;
 top: 0px;
 
 background: #131C2A;
 }
 
-.slidecontainer {
-  width: 70%;
-  position: absolute;
-  top: 45%;
-  right: 10%;
-}
 
 /* The slider itself */
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
+  width: 100%; /* Full-width */
   height: 25px; /* Specified height */
-  background: #7F8085; /* Grey background */
+  background: #d3d3d3; /* Grey background */
   outline: none; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+  opacity: 1; /* Fully shown on mouse-over */
 }
 
 /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
@@ -222,118 +217,13 @@ background: #131C2A;
   appearance: none;
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
-  background: #68F0B0; /* Green background */
+  background: #04AA6D; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
 
 .slider::-moz-range-thumb {
   width: 25px; /* Set a specific slider handle width */
   height: 25px; /* Slider handle height */
-  background: #68F0B0; /* Green background */
+  background: #04AA6D; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
-
-.slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 15px;
-  border-radius: 100px;  
-  background: #7F8085;
-  outline: none;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%; 
-  background: #68F0B0;
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 100%;
-  background: #68F0B0;
-  cursor: pointer;
-}
-
-#empty-state {
-position: absolute;
-width: 309px;
-height: 104px;
-left: 867px;
-top: 300px;
-
-font-family: 'Chakra Petch';
-font-style: normal;
-font-weight: 700;
-font-size: 40px;
-line-height: 52px;
-text-align: center;
-
-color: #000000;
-}
-
-#conf-bg {
-  background-color: #131C2A;
-}
-
-#hero-conf {
-  height: 65px;
-  text-align: center;
-  padding-top: 10%;
-
-font-family: 'Chakra Petch';
-font-style: normal;
-font-weight: 700;
-font-size: 50px;
-line-height: 65px;
-/* identical to box height */
-
-text-align: center;
-
-color: #FFFFFF;
-}
-
-#hero-conf02 {
-  height: 65px;
-  text-align: center;
-
-font-family: 'Chakra Petch';
-font-style: normal;
-font-weight: 700;
-font-size: 30px;
-/* identical to box height */
-
-text-align: center;
-
-color: #FFFFFF;
-}
-
-#hero-conf03 {
-  height: 65px;
-  text-align: center;
-
-  
-  font-family: 'Chakra Petch';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 50px;
-  /* identical to box height */
-  
-  text-align: center;
-  
-  color: #FFFFFF;
-  }
-
-  #but-dash {
-    position: fixed;
-    width: 259px;
-    height: 74px;
-
-background: #68F0B0;
-border-radius: 3px;
-  }

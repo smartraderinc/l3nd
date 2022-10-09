@@ -14,7 +14,7 @@ import "./interfaces/iLoanFactory.sol";
 import "./interfaces/iSuperToken.sol";
 import "./interfaces/ISETH.sol";
 
-contract LendToken is
+contract L3ND is
     Initializable,
     ERC20Upgradeable,
     OwnableUpgradeable,

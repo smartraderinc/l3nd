@@ -115,6 +115,7 @@
             });
             
             checkBalance()
+            fetchNFTs()
         } catch (error) {
             console.log(error);
         }
@@ -188,9 +189,9 @@
     };
 
     const fetchNFTs = async () => {
-
         try {
         const nfts = await alchemy.nft.getNftsForOwner(myAccount);
+            console.log(nfts)
             return nfts
         } catch (error) {
         console.log(error);

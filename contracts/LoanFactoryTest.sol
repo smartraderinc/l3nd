@@ -59,8 +59,6 @@ contract LoanFactory is Initializable, OwnableUpgradeable, UUPSUpgradeable {
         uint256 _tokenId,
         address _debtor
     ) public payable returns (address) {
-        // Only l3nd contract can call
-        require(msg.sender == L3ND_ADDR, "NOT_L3ND");
 
         // This syntax is a newer way to invoke create2 without assembly, you just need to pass salt
         // https://docs.soliditylang.org/en/latest/control-structures.html#salted-contract-creations-create2
